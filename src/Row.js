@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import DescriptionIcon from '@mui/icons-material/Description';
 import axios from "./axios";
 import "./Row.css";
 {
   /* axios => instance */
 }
-
+    
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl, isLargeRow }) {
@@ -43,10 +45,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 setTrailerUrl(urlParams.get("v"));
             }).catch((error) => console.log(error));
 
-            // const urlParams = new URLSearchParams(new URL(li).search);
-            //     setTrailerUrl(urlParams.get("v"));
-
-
             // movieTrailer(movie?.name || "")
             // .then((url) => {
             //     console.log(url)
@@ -64,15 +62,20 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
       <div className="row_posters">
         {movies.map((movie) => (
-          <img
-            key={movie.id}
-            onClick={() => handleClick(movie)}
-            className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-            src={`${base_url}${isLargeRow ?  movie.poster_path : movie.backdrop_path}`}
-            alt={movie.name}
-          />
+          <>
+            <img
+              key={movie.id}
+              onClick={() => handleClick(movie)}
+              className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+              src={`${base_url}${isLargeRow ?  movie.poster_path : movie.backdrop_path}`}
+              alt={movie.name}
+            />
+            <PlayCircleOutlineIcon className="row_btn" />
+            <DescriptionIcon className="row_btn" />
+          </>
         ))}
       </div>
+      
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} /> }
     </div>
   );
