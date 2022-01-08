@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { auth, provider } from './firebase';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+// import {logo} from '../public/images/logo.jpeg';
 import {
     selectUserName,
     selectUserPhoto,
     setSignOutState,
     setUserLoginDetails,
   } from "./features/user/userSlice";
+
 
 import './Nav.css';
 
@@ -69,7 +71,9 @@ function Nav(props) {
 
     return (
         <div className={`nav ${show && "nav_black"}`}> 
-            <div className='nav_avatar'><h2>NETFLIX</h2></div>
+            <div className='nav_avatar'>
+                <img src='./images/logo.png' style={{height: '3.5rem', width: '7rem', top: 0}}></img>
+            </div>
             
             <div className='nav_login'>
             {

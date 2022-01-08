@@ -5,15 +5,20 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import DescriptionIcon from '@mui/icons-material/Description';
 import axios from "./axios";
 import "./Row.css";
+import {useHistory} from 'react-router-dom';
 {
   /* axios => instance */
 }
     
 const base_url = "https://image.tmdb.org/t/p/original/";
 
+
+
 function Row({ title, fetchUrl, isLargeRow }) {
+  
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchData() {
@@ -34,25 +39,31 @@ function Row({ title, fetchUrl, isLargeRow }) {
   };
 
   const handleClick = (movie) => {
-      console.log(movie)
-      if(trailerUrl){
-          setTrailerUrl("");
-      } else{
-          // find trailer of movie in youtube
+    console.log(movie);
+    history.push({
+      pathname : '/desc',
+      state: movie
+    })
+    
+      // console.log(movie)
+      // if(trailerUrl){
+      //     setTrailerUrl("");
+      // } else{
+      //     // find trailer of movie in youtube
 
-            movieTrailer( movie.name, { tmdbId : movie.id } ).then((url) => {
-                const urlParams = new URLSearchParams(new URL(url).search);
-                setTrailerUrl(urlParams.get("v"));
-            }).catch((error) => console.log(error));
+      //       movieTrailer( movie.name, { tmdbId : movie.id } ).then((url) => {
+      //           const urlParams = new URLSearchParams(new URL(url).search);
+      //           setTrailerUrl(urlParams.get("v"));
+      //       }).catch((error) => console.log(error));
 
-            // movieTrailer(movie?.name || "")
-            // .then((url) => {
-            //     console.log(url)
-            //     const urlParams = new URLSearchParams(new URL(url).search);
-            //     setTrailerUrl(urlParams.get("v"));
-            // })
-            // .catch((error) => console.log(error));
-      }
+      //       // movieTrailer(movie?.name || "")
+      //       // .then((url) => {
+      //       //     console.log(url)
+      //       //     const urlParams = new URLSearchParams(new URL(url).search);
+      //       //     setTrailerUrl(urlParams.get("v"));
+      //       // })
+      //       // .catch((error) => console.log(error));
+     // }
   }
   
 
@@ -62,7 +73,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
       <div className="row_posters">
         {movies.map((movie) => (
-          <>
             <img
               key={movie.id}
               onClick={() => handleClick(movie)}
@@ -70,9 +80,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
               src={`${base_url}${isLargeRow ?  movie.poster_path : movie.backdrop_path}`}
               alt={movie.name}
             />
-            <PlayCircleOutlineIcon className="row_btn" />
-            <DescriptionIcon className="row_btn" />
-          </>
         ))}
       </div>
       

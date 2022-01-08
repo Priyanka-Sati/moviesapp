@@ -1,12 +1,11 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-// import Switch from "react-switch";
 import './App.css';
 import Row from './Row';
 import requests from './requests';
 import Banner from './Banner';
 import Nav from './Nav';
-import Login from './Login';
 import Home from './Home';
+import Description from './Description';
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
       <Router>
         <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
+        <Route path="/desc" component={Description} />
         </Switch>
       </Router>
 
