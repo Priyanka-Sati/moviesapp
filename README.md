@@ -11,5 +11,6 @@ On second page there is an option to play trailer (used react-youtube and movie-
 
 # Package Install
 1. Axios
-2. react-youtube
-3. movie-trailer
+2. react-router
+3. react-youtube
+4. movie-trailer
